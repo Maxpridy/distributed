@@ -1,0 +1,917 @@
+
+
+
+ Distributed computing - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Distributed computing
+ Wikipedia , free encyclopedia
+
+ Jump : navigation , search
+
+ `` Distributed Information Processing '' redirects . computer company , see DIP Research .
+ `` Distributed application '' redirects . smart contract , see Decentralized application .
+ Distributed computing field computer science study distributed system . distributed system model component located networked computer communicate coordinate action passing message . [ 1 ] component interact order achieve common goal . Three significant characteristic distributed system : concurrency component , lack global clock , independent failure component . [ 1 ] Examples distributed system vary SOA-based system massively multiplayer online game peer-to-peer application .
+ computer program run distributed system called distributed program , distributed programming process writing program . [ 2 ] many alternative message passing mechanism , including pure HTTP , RPC-like connector message queue . [ citation needed ]
+ goal challenge pursued computer scientist practitioner distributed system location transparency ; however , goal fallen favour industry , distributed system different conventional non-distributed system , difference , network partition , partial system failure , partial upgrade , simply `` papered '' attempt `` transparency '' ( see CAP theorem ) . [ citation needed ]
+ Distributed computing also refers use distributed system solve computational problem . distributed computing , problem divided many task , solved one computer , [ 3 ] communicate message passing . [ 4 ]
+
+
+
+ Contents
+
+
+ 1 Introduction
+ 2 Parallel distributed computing
+ 3 History
+ 4 Architectures
+ 5 Applications
+ 6 Examples
+ 7 Theoretical foundation
+
+ 7.1 Models
+ 7.2 example
+ 7.3 Complexity measure
+ 7.4 problem
+ 7.5 Properties distributed system
+
+
+ 8 See also
+ 9 Notes
+ 10 References
+ 11 reading
+ 12 External link
+
+
+
+ Introduction [ edit ]
+ word distributed term `` distributed system '' , `` distributed programming '' , `` distributed algorithm '' originally referred computer network individual computer physically distributed within geographical area . [ 5 ] term nowadays used much wider sense , even referring autonomous process run physical computer interact message passing . [ 4 ]
+ single definition distributed system , [ 6 ] following defining property commonly used :
+
+ several autonomous computational entity ( computer node ) , local memory . [ 7 ]
+ entity communicate message passing . [ 8 ]
+
+ distributed system may common goal , solving large computational problem ; [ 9 ] user perceives collection autonomous processor unit . Alternatively , computer may user individual need , purpose distributed system coordinate use shared resource provide communication service user . [ 10 ]
+ typical property distributed system include following :
+
+ system tolerate failure individual computer . [ 11 ]
+ structure system ( network topology , network latency , number computer ) known advance , system may consist different kind computer network link , system may change execution distributed program . [ 12 ]
+ computer limited , incomplete view system . computer may know one part input . [ 13 ]
+
+ Parallel distributed computing [ edit ]
+
+
+
+
+ ( ) , ( b ) : distributed system .
+ ( c ) : parallel system .
+
+
+ Distributed system group networked computer , goal work . term `` concurrent computing '' , `` parallel computing '' , `` distributed computing '' lot overlap , clear distinction exists . [ 14 ] system may characterized `` parallel '' `` distributed '' ; processor typical distributed system run concurrently parallel . [ 15 ] Parallel computing may seen particular tightly coupled form distributed computing , [ 16 ] distributed computing may seen loosely coupled form parallel computing . [ 6 ] Nevertheless , possible roughly classify concurrent system `` parallel '' `` distributed '' using following criterion :
+
+ parallel computing , processor may access shared memory exchange information processor . [ 17 ]
+ distributed computing , processor private memory ( distributed memory ) . Information exchanged passing message processor . [ 18 ]
+
+ figure right illustrates difference distributed parallel system . Figure ( ) schematic view typical distributed system ; system represented network topology node computer line connecting node communication link . Figure ( b ) show distributed system detail : computer local memory , information exchanged passing message one node another using available communication link . Figure ( c ) show parallel system processor direct access shared memory .
+ situation complicated traditional us term parallel distributed algorithm quite match definition parallel distributed system ( see detailed discussion ) . Nevertheless , rule thumb , high-performance parallel computation shared-memory multiprocessor us parallel algorithm coordination large-scale distributed system us distributed algorithm . [ citation needed ]
+ History [ edit ]
+ use concurrent process communicate message-passing root operating system architecture studied 1960s . [ 19 ] first widespread distributed system local-area network Ethernet , invented 1970s . [ 20 ]
+ ARPANET , predecessor Internet , introduced late 1960s , ARPANET e-mail invented early 1970s . E-mail became successful application ARPANET , [ 21 ] probably earliest example large-scale distributed application . addition ARPANET , successor , Internet , early worldwide computer network included Usenet FidoNet 1980s , used support distributed discussion system . [ citation needed ]
+ study distributed computing became branch computer science late 1970s early 1980s . first conference field , Symposium Principles Distributed Computing ( PODC ) , date back 1982 , European counterpart International Symposium Distributed Computing ( DISC ) first held 1985 . [ citation needed ]
+ Architectures [ edit ]
+ Various hardware software architecture used distributed computing . lower level , necessary interconnect multiple CPUs sort network , regardless whether network printed onto circuit board made loosely coupled device cable . higher level , necessary interconnect process running CPUs sort communication system . [ citation needed ]
+ Distributed programming typically fall one several basic architecture : client–server , three-tier , n-tier , peer-to-peer ; category : loose coupling , tight coupling . [ 22 ]
+
+ Client–server : architecture smart client contact server data format display user . Input client committed back server represents permanent change .
+ Three-tier : architecture move client intelligence middle tier stateless client used . simplifies application deployment . web application three-tier .
+ n-tier : architecture refer typically web application forward request enterprise service . type application one responsible success application server .
+ Peer-to-peer : architecture special machine provide service manage network resource . [ 23 ] :227 Instead responsibility uniformly divided among machine , known peer . Peers serve client server . [ citation needed ]
+
+ Another basic aspect distributed computing architecture method communicating coordinating work among concurrent process . various message passing protocol , process may communicate directly one another , typically master/slave relationship . Alternatively , `` database-centric '' architecture enable distributed computing done without form direct inter-process communication , utilizing shared database . [ 24 ]
+ Applications [ edit ]
+ Reasons using distributed system distributed computing may include :
+
+ nature application may require use communication network connects several computer : example , data produced one physical location required another location .
+ many case use single computer would possible principle , use distributed system beneficial practical reason . example , may cost-efficient obtain desired level performance using cluster several low-end computer , comparison single high-end computer . distributed system provide reliability non-distributed system , single point failure . Moreover , distributed system may easier expand manage monolithic uniprocessor system . [ 25 ]
+
+ Examples [ edit ]
+ Examples distributed system application distributed computing include following : [ 26 ]
+
+ telecommunication network :
+
+ telephone network cellular network ,
+ computer network Internet ,
+ wireless sensor network ,
+ routing algorithm ;
+
+
+ network application :
+
+ World Wide Web peer-to-peer network ,
+ massively multiplayer online game virtual reality community ,
+ distributed database distributed database management system ,
+ network file system ,
+ distributed information processing system banking system airline reservation system ;
+
+
+ real-time process control :
+
+ aircraft control system ,
+ industrial control system ;
+
+
+ parallel computation :
+
+ scientific computing , including cluster computing grid computing various volunteer computing project ( see list distributed computing project ) ,
+ distributed rendering computer graphic
+
+
+
+ Theoretical foundation [ edit ]
+ Main article : Distributed algorithm
+ Models [ edit ]
+ Many task would like automate using computer question–answer type : would like ask question computer produce answer . theoretical computer science , task called computational problem . Formally , computational problem consists instance together solution instance . Instances question ask , solution desired answer question .
+ Theoretical computer science seek understand computational problem solved using computer ( computability theory ) efficiently ( computational complexity theory ) . Traditionally , said problem solved using computer design algorithm produce correct solution given instance . algorithm implemented computer program run general-purpose computer : program read problem instance input , performs computation , produce solution output . Formalisms random access machine universal Turing machine used abstract model sequential general-purpose computer executing algorithm . [ citation needed ]
+ field concurrent distributed computing study similar question case either multiple computer , computer executes network interacting process : computational problem solved network efficiently ? However , obvious meant `` solving problem '' case concurrent distributed system : example , task algorithm designer , concurrent distributed equivalent sequential general-purpose computer ? [ citation needed ]
+ discussion focus case multiple computer , although many issue concurrent process running single computer .
+ Three viewpoint commonly used :
+
+ Parallel algorithm shared-memory model
+
+
+ processor access shared memory . algorithm designer chooses program executed processor .
+ One theoretical model parallel random access machine ( PRAM ) used . [ 27 ] However , classical PRAM model assumes synchronous access shared memory .
+ Shared-memory program extended distributed system underlying operating system encapsulates communication node virtually unifies memory across individual system .
+ model closer behavior real-world multiprocessor machine take account use machine instruction , Compare-and-swap ( CAS ) , asynchronous shared memory . wide body work model , summary found literature . [ 28 ] [ 29 ]
+
+
+ Parallel algorithm message-passing model
+
+
+ algorithm designer chooses structure network , well program executed computer .
+ Models Boolean circuit sorting network used . [ 30 ] Boolean circuit seen computer network : gate computer run extremely simple computer program . Similarly , sorting network seen computer network : comparator computer .
+
+
+ Distributed algorithm message-passing model
+
+
+ algorithm designer chooses computer program . computer run program . system must work correctly regardless structure network .
+ commonly used model graph one finite-state machine per node .
+
+ case distributed algorithm , computational problem typically related graph . Often graph describes structure computer network problem instance . illustrated following example . [ citation needed ]
+ example [ edit ]
+ Consider computational problem finding coloring given graph G. Different field might take following approach :
+
+ Centralized algorithm [ citation needed ]
+
+
+ graph G encoded string , string given input computer . computer program find coloring graph , encodes coloring string , output result .
+
+
+ Parallel algorithm
+
+
+ , graph G encoded string . However , multiple computer access string parallel . computer might focus one part graph produce coloring part .
+ main focus high-performance computation exploit processing power multiple computer parallel .
+
+
+ Distributed algorithm
+
+
+ graph G structure computer network . one computer node G one communication link edge G. Initially , computer know immediate neighbor graph G ; computer must exchange message discover structure G. computer must produce color output .
+ main focus coordinating operation arbitrary distributed system . [ citation needed ]
+
+ field parallel algorithm different focus field distributed algorithm , lot interaction two field . example , Cole–Vishkin algorithm graph coloring [ 31 ] originally presented parallel algorithm , technique also used directly distributed algorithm .
+ Moreover , parallel algorithm implemented either parallel system ( using shared memory ) distributed system ( using message passing ) . [ 32 ] traditional boundary parallel distributed algorithm ( choose suitable network vs. run given network ) lie place boundary parallel distributed system ( shared memory vs. message passing ) .
+ Complexity measure [ edit ]
+ parallel algorithm , yet another resource addition time space number computer . Indeed , often trade-off running time number computer : problem solved faster computer running parallel ( see speedup ) . decision problem solved polylogarithmic time using polynomial number processor , problem said class NC . [ 33 ] class NC defined equally well using PRAM formalism Boolean circuits—PRAM machine simulate Boolean circuit efficiently vice versa . [ 34 ]
+ analysis distributed algorithm , attention usually paid communication operation computational step . Perhaps simplest model distributed computing synchronous system node operate lockstep fashion . communication round , node parallel ( 1 ) receive latest message neighbour , ( 2 ) perform arbitrary local computation , ( 3 ) send new message neighbor . system , central complexity measure number synchronous communication round required complete task . [ 35 ]
+ complexity measure closely related diameter network . Let diameter network . one hand , computable problem solved trivially synchronous distributed system approximately 2D communication round : simply gather information one location ( round ) , solve problem , inform node solution ( round ) .
+ hand , running time algorithm much smaller communication round , node network must produce output without possibility obtain information distant part network . word , node must make globally consistent decision based information available local neighbourhood . Many distributed algorithm known running time much smaller round , understanding problem solved algorithm one central research question field . [ 36 ]
+ commonly used measure total number bit transmitted network ( cf . communication complexity ) . [ citation needed ]
+ problem [ edit ]
+ Traditional computational problem take perspective ask question , computer ( distributed system ) process question , produce answer stop . However , also problem want system ever stop . Examples problem include dining philosopher problem similar mutual exclusion problem . problem , distributed system supposed continuously coordinate use shared resource conflict deadlock occur .
+ also fundamental challenge unique distributed computing . first example challenge related fault-tolerance . Examples related problem include consensus problem , [ 37 ] Byzantine fault tolerance , [ 38 ] self-stabilisation . [ 39 ]
+ lot research also focused understanding asynchronous nature distributed system :
+
+ Synchronizers used run synchronous algorithm asynchronous system . [ 40 ]
+ Logical clock provide causal happened-before ordering event . [ 41 ]
+ Clock synchronization algorithm provide globally consistent physical time stamp . [ 42 ]
+
+ Election
+ Coordinator election ( leader election ) process designating single process organizer task distributed among several computer ( node ) . task begun , network node either unaware node serve `` coordinator '' ( leader ) task , unable communicate current coordinator . coordinator election algorithm run , however , node throughout network recognizes particular , unique node task coordinator . [ citation needed ]
+ network node communicate among order decide get `` coordinator '' state . , need method order break symmetry among . example , node unique comparable identity , node compare identity , decide node highest identity coordinator . [ citation needed ]
+ definition problem often attributed LeLann , formalized method create new token token ring network token lost . [ 43 ]
+ Coordinator election algorithm designed economical term total byte transmitted , time . algorithm suggested Gallager , Humblet , Spira [ 44 ] general undirected graph strong impact design distributed algorithm general , Dijkstra Prize influential paper distributed computing .
+ Many algorithm suggested different kind network graph , undirected ring , unidirectional ring , complete graph , grid , directed Euler graph , others . general method decouples issue graph family design coordinator election algorithm suggested Korach , Kutten , Moran . [ 45 ]
+ order perform coordination , distributed system employ concept coordinator . coordinator election problem choose process among group process different processor distributed system act central coordinator . Several central coordinator election algorithm exist . [ 46 ]
+ Properties distributed system [ edit ]
+ far focus designing distributed system solves given problem . complementary research problem studying property given distributed system . [ 47 ] [ 48 ]
+ halting problem analogous example field centralised computation : given computer program task decide whether halt run forever . halting problem undecidable general case , naturally understanding behaviour computer network least hard understanding behaviour one computer . [ citation needed ]
+ However , many interesting special case decidable . particular , possible reason behaviour network finite-state machine . One example telling whether given network interacting ( asynchronous non-deterministic ) finite-state machine reach deadlock . problem PSPACE-complete , [ 49 ] i.e. , decidable , likely efficient ( centralised , parallel distributed ) algorithm solves problem case large network .
+ See also [ edit ]
+
+
+ AppScale
+ BOINC
+ Blockchain
+ Code mobility
+ Decentralized computing
+ Distributed algorithmic mechanism design
+ Distributed cache
+ Distributed operating system
+ Edsger W. Dijkstra Prize Distributed Computing
+ Fog computing
+ Folding @ home
+ Inferno
+ Jungle computing
+ Layered queueing network
+ Library Oriented Architecture ( LOA )
+ List distributed computing conference
+ List distributed computing project
+ List important publication concurrent , parallel , distributed computing
+ Model checking
+ Parallel distributed processing
+ Parallel programming model
+ Plan 9 Bell Labs
+ Shared nothing architecture
+
+
+ Notes [ edit ]
+
+
+ ^ b Coulouris , George ; Jean Dollimore ; Tim Kindberg ; Gordon Blair ( 2011 ) . Distributed Systems : Concepts Design ( 5th Edition ) . Boston : Addison-Wesley . ISBN 0-132-14301-1 .
+ ^ Andrews ( 2000 ) . Dolev ( 2000 ) . Ghosh ( 2007 ) , p. 10 .
+ ^ Godfrey ( 2002 ) .
+ ^ b Andrews ( 2000 ) , p. 291–292 . Dolev ( 2000 ) , p. 5 .
+ ^ Lynch ( 1996 ) , p. 1 .
+ ^ b Ghosh ( 2007 ) , p. 10 .
+ ^ Andrews ( 2000 ) , pp . 8–9 , 291 . Dolev ( 2000 ) , p. 5 . Ghosh ( 2007 ) , p. 3 . Lynch ( 1996 ) , p. xix , 1 . Peleg ( 2000 ) , p. xv .
+ ^ Andrews ( 2000 ) , p. 291 . Ghosh ( 2007 ) , p. 3 . Peleg ( 2000 ) , p. 4 .
+ ^ Ghosh ( 2007 ) , p. 3–4 . Peleg ( 2000 ) , p. 1 .
+ ^ Ghosh ( 2007 ) , p. 4 . Peleg ( 2000 ) , p. 2 .
+ ^ Ghosh ( 2007 ) , p. 4 , 8 . Lynch ( 1996 ) , p. 2–3 . Peleg ( 2000 ) , p. 4 .
+ ^ Lynch ( 1996 ) , p. 2 . Peleg ( 2000 ) , p. 1 .
+ ^ Ghosh ( 2007 ) , p. 7 . Lynch ( 1996 ) , p. xix , 2 . Peleg ( 2000 ) , p. 4 .
+ ^ Ghosh ( 2007 ) , p. 10 . Keidar ( 2008 ) .
+ ^ Lynch ( 1996 ) , p. xix , 1–2 . Peleg ( 2000 ) , p. 1 .
+ ^ Peleg ( 2000 ) , p. 1 .
+ ^ Papadimitriou ( 1994 ) , Chapter 15 . Keidar ( 2008 ) .
+ ^ See reference Introduction .
+ ^ Andrews ( 2000 ) , p. 348 .
+ ^ Andrews ( 2000 ) , p. 32 .
+ ^ Peter ( 2004 ) , history email .
+ ^ `` Real Time Distributed Computing Systems '' ( PDF ) . ISSN 2278-0661 . Retrieved 2017-01-09 .
+ ^ Vigna P , Casey MJ . Age Cryptocurrency : Bitcoin Blockchain Challenging Global Economic Order St. Martin 's Press January 27 , 2015 ISBN 9781250065636
+ ^ Lind P , Alm ( 2006 ) , `` database-centric virtual chemistry system '' , J Chem Inf Model , 46 ( 3 ) : 1034–9 , doi:10.1021/ci050360b , PMID 16711722 .
+ ^ Elmasri & Navathe ( 2000 ) , Section 24.1.2 .
+ ^ Andrews ( 2000 ) , p. 10–11 . Ghosh ( 2007 ) , p. 4–6 . Lynch ( 1996 ) , p. xix , 1 . Peleg ( 2000 ) , p. xv . Elmasri & Navathe ( 2000 ) , Section 24 .
+ ^ Cormen , Leiserson & Rivest ( 1990 ) , Section 30 .
+ ^ Herlihy & Shavit ( 2008 ) , Chapters 2-6 .
+ ^ Lynch ( 1996 )
+ ^ Cormen , Leiserson & Rivest ( 1990 ) , Sections 28 29 .
+ ^ Cole & Vishkin ( 1986 ) . Cormen , Leiserson & Rivest ( 1990 ) , Section 30.5 .
+ ^ Andrews ( 2000 ) , p. ix .
+ ^ Arora & Barak ( 2009 ) , Section 6.7 . Papadimitriou ( 1994 ) , Section 15.3 .
+ ^ Papadimitriou ( 1994 ) , Section 15.2 .
+ ^ Lynch ( 1996 ) , p. 17–23 .
+ ^ Peleg ( 2000 ) , Sections 2.3 7 . Linial ( 1992 ) . Naor & Stockmeyer ( 1995 ) .
+ ^ Lynch ( 1996 ) , Sections 5–7 . Ghosh ( 2007 ) , Chapter 13 .
+ ^ Lynch ( 1996 ) , p. 99–102 . Ghosh ( 2007 ) , p. 192–193 .
+ ^ Dolev ( 2000 ) . Ghosh ( 2007 ) , Chapter 17 .
+ ^ Lynch ( 1996 ) , Section 16 . Peleg ( 2000 ) , Section 6 .
+ ^ Lynch ( 1996 ) , Section 18 . Ghosh ( 2007 ) , Sections 6.2–6.3 .
+ ^ Ghosh ( 2007 ) , Section 6.4 .
+ ^ LeLann , G. ( 1977 ) . `` Distributed system - toward formal approach , '' . Information Processing . 77 : 155·160 . – via Elsevier .
+ ^ R. G. Gallager , P. A. Humblet , P. M. Spira ( January 1983 ) . `` Distributed Algorithm Minimum-Weight Spanning Trees '' ( PDF ) . ACM Transactions Programming Languages Systems . 5 ( 1 ) : 66–77 . doi:10.1145/357195.357200 . CS1 maint : Multiple name : author list ( link )
+ ^ Korach , Ephraim ; Kutten , Shay ; Moran , Shlomo ( 1990 ) . `` Modular Technique Design Efficient Distributed Leader Finding Algorithms '' ( PDF ) . ACM Transactions Programming Languages Systems . 12 ( 1 ) : 84–101 . doi:10.1145/77606.77610 .
+ ^ Hamilton , Howard . `` Distributed Algorithms '' . Retrieved 2013-03-03 .
+ ^ http : //cstheory.stackexchange.com/questions/10045/major-unsolved-problems-in-distributed-systems
+ ^ http : //www.theserverside.com/feature/How-big-data-and-distributed-systems-solve-traditional-scalability-problems
+ ^ Papadimitriou ( 1994 ) , Section 19.3 .
+
+
+ References [ edit ]
+
+ Books
+
+
+ Andrews , Gregory R. ( 2000 ) , Foundations Multithreaded , Parallel , Distributed Programming , Addison–Wesley , ISBN 0-201-35752-6 .
+ Arora , Sanjeev ; Barak , Boaz ( 2009 ) , Computational Complexity – Modern Approach , Cambridge , ISBN 978-0-521-42426-4 .
+ Cormen , Thomas H. ; Leiserson , Charles E. ; Rivest , Ronald L. ( 1990 ) , Introduction Algorithms ( 1st ed . ) , MIT Press , ISBN 0-262-03141-8 .
+ Dolev , Shlomi ( 2000 ) , Self-Stabilization , MIT Press , ISBN 0-262-04178-2 .
+ Elmasri , Ramez ; Navathe , Shamkant B . ( 2000 ) , Fundamentals Database Systems ( 3rd ed . ) , Addison–Wesley , ISBN 0-201-54263-3 .
+ Ghosh , Sukumar ( 2007 ) , Distributed Systems – Algorithmic Approach , Chapman & Hall/CRC , ISBN 978-1-58488-564-1 .
+ Lynch , Nancy . ( 1996 ) , Distributed Algorithms , Morgan Kaufmann , ISBN 1-55860-348-4 .
+ Herlihy , Maurice P. ; Shavit , Nir N. ( 2008 ) , Art Multiprocessor Programming , Morgan Kaufmann , ISBN 0-12-370591-6 .
+ Papadimitriou , Christos H. ( 1994 ) , Computational Complexity , Addison–Wesley , ISBN 0-201-53082-1 .
+ Peleg , David ( 2000 ) , Distributed Computing : Locality-Sensitive Approach , SIAM , ISBN 0-89871-464-8 .
+
+
+ Articles
+
+
+ Cole , Richard ; Vishkin , Uzi ( 1986 ) , `` Deterministic coin tossing application optimal parallel list ranking '' , Information Control , 70 ( 1 ) : 32–53 , doi:10.1016/S0019-9958 ( 86 ) 80023-7 .
+ Keidar , Idit ( 2008 ) , `` Distributed computing column 32 – year review '' , ACM SIGACT News , 39 ( 4 ) : 53–54 , doi:10.1145/1466390.1466402 .
+ Linial , Nathan ( 1992 ) , `` Locality distributed graph algorithm '' , SIAM Journal Computing , 21 ( 1 ) : 193–201 , doi:10.1137/0221015 .
+ Naor , Moni ; Stockmeyer , Larry ( 1995 ) , `` computed locally ? '' ( PDF ) , SIAM Journal Computing , 24 ( 6 ) : 1259–1277 , doi:10.1137/S0097539793254571 .
+
+
+ Web site
+
+
+ Godfrey , Bill ( 2002 ) . `` primer distributed computing '' .
+ Peter , Ian ( 2004 ) . `` Ian Peter 's History Internet '' . Retrieved 2009-08-04 .
+
+ reading [ edit ]
+
+ Books
+
+
+ Attiya , Hagit Jennifer Welch ( 2004 ) , Distributed Computing : Fundamentals , Simulations , Advanced Topics , Wiley-Interscience ISBN 0-471-45324-2 .
+ Christian Cachin ; Rachid Guerraoui ; Luís Rodrigues ( 2011 ) , Introduction Reliable Secure Distributed Programming ( 2 . ed . ) , Springer , ISBN 978-3-642-15259-7
+ Coulouris , George ; et al . ( 2011 ) , Distributed Systems : Concepts Design ( 5th Edition ) , Addison-Wesley ISBN 0-132-14301-1 .
+ Faber , Jim ( 1998 ) , Java Distributed Computing , O'Reilly : Java Distributed Computing Jim Faber , 1998
+ Garg , Vijay K. ( 2002 ) , Elements Distributed Computing , Wiley-IEEE Press ISBN 0-471-03600-5 .
+ Tel , Gerard ( 1994 ) , Introduction Distributed Algorithms , Cambridge University Press
+ Chandy , Mani ; et al. , Parallel Program Design
+
+
+ Articles
+
+
+ Keidar , Idit ; Rajsbaum , Sergio , ed . ( 2000–2009 ) , `` Distributed computing column '' , ACM SIGACT News .
+ Birrell , A. D. ; Levin , R. ; Schroeder , M. D. ; Needham , R. M. ( April 1982 ) . `` Grapevine : exercise distributed computing '' ( PDF ) . Communications ACM . 25 ( 4 ) : 260–274 . doi:10.1145/358468.358487 .
+
+
+ Conference Papers
+
+
+ C. Rodríguez , M. Villagra B. Barán , Asynchronous team algorithm Boolean Satisfiability , Bionetics2007 , pp . 66–69 , 2007 .
+
+ External link [ edit ]
+
+
+
+ Wikimedia Commons medium related Distributed computing .
+
+
+
+ Distributed computing Curlie ( based DMOZ )
+ Distributed computing journal Curlie ( based DMOZ )
+
+
+
+
+
+
+
+ v
+
+ e
+
+
+ Parallel computing
+
+
+
+ General
+
+
+
+ Distributed computing
+ Parallel computing
+ Massively parallel
+ Cloud computing
+ High-performance computing
+ Multiprocessing
+ Manycore processor
+ GPGPU
+ Computer network
+ Systolic array
+
+
+
+
+
+ Levels
+
+
+
+ Bit
+ Instruction
+ Thread
+ Task
+ Data
+ Memory
+ Loop
+ Pipeline
+
+
+
+
+
+ Multithreading
+
+
+
+ Temporal
+ Simultaneous ( SMT )
+ Speculative ( SpMT )
+ Preemptive
+ Cooperative
+ Clustered Multi-Thread ( CMT )
+ Hardware scout
+
+
+
+
+
+ Theory
+
+
+
+ PRAM model
+ Analysis parallel algorithm
+ Amdahl 's law
+ Gustafson 's law
+ Cost efficiency
+ Karp–Flatt metric
+ Slowdown
+ Speedup
+
+
+
+
+
+ Elements
+
+
+
+ Process
+ Thread
+ Fiber
+ Instruction window
+
+
+
+
+
+ Coordination
+
+
+
+ Multiprocessing
+ Memory coherency
+ Cache coherency
+ Cache invalidation
+ Barrier
+ Synchronization
+ Application checkpointing
+
+
+
+
+
+ Programming
+
+
+
+ Stream processing
+ Dataflow programming
+ Models
+
+ Implicit parallelism
+ Explicit parallelism
+ Concurrency
+
+
+ Non-blocking algorithm
+
+
+
+
+
+ Hardware
+
+
+
+ Flynn 's taxonomy
+
+ SISD
+ SIMD
+ SIMT
+ MISD
+ MIMD
+
+
+ Dataflow architecture
+ Pipelined processor
+ Superscalar processor
+ Vector processor
+ Multiprocessor
+
+ symmetric
+ asymmetric
+
+
+ Memory
+
+ shared
+ distributed
+ distributed shared
+ UMA
+ NUMA
+ COMA
+
+
+ Massively parallel computer
+ Computer cluster
+ Grid computer
+
+
+
+
+
+ APIs
+
+
+
+ Ateji PX
+ Boost.Thread
+ Chapel
+ Charm++
+ Cilk
+ Coarray Fortran
+ CUDA
+ Dryad
+ C++ AMP
+ Global Arrays
+ MPI
+ OpenMP
+ OpenCL
+ OpenHMPP
+ OpenACC
+ TPL
+ PLINQ
+ PVM
+ POSIX Threads
+ RaftLib
+ UPC
+ TBB
+ ZPL
+
+
+
+
+
+ Problems
+
+
+
+ Deadlock
+ Livelock
+ Deterministic algorithm
+ Embarrassingly parallel
+ Parallel slowdown
+ Race condition
+ Software lockout
+ Scalability
+ Starvation
+
+
+
+
+
+
+
+
+ Category : parallel computing
+ Media related Parallel computing Wikimedia Commons
+
+
+
+
+
+
+
+
+
+
+
+
+ v
+
+ e
+
+
+ Edsger Dijkstra
+
+
+
+ Publications
+
+
+
+ Structured Programming ( book )
+ Discipline Programming ( book )
+ Method Programming ( book )
+ Predicate Calculus Program Semantics ( book )
+ Selected Writings Computing : Personal Perspective ( book )
+ Selected paper
+ EWDs ( EWD manuscript ) 1
+ Go Statement Considered Harmful
+ Cruelty Really Teaching Computer Science
+
+
+
+
+
+ Main research area
+
+
+
+ Theoretical computing science
+ Software engineering
+ Systems science
+ Algorithm design
+ Concurrent computing
+ Distributed computing
+ Formal method
+ Programming methodology
+ Programming language research
+ Program design development
+ Software architecture
+
+
+
+
+
+ Scientific contribution
+
+
+
+
+ Concepts method
+
+
+
+ ALGOL 60 implementation
+ Call stack
+ Concurrency
+ Concurrent programming
+ Cooperating sequential process
+ Critical section
+ Deadly embrace ( deadlock )
+ Dining philosopher problem
+ Dutch national flag problem
+ Fault-tolerant system
+ Goto-less programming
+ Guarded Command Language
+ Layered structure software architecture
+ Levels abstraction
+ Multithreaded programming
+ Mutual exclusion ( mutex )
+ Philosophy computer programming computing science
+ Producer–consumer problem ( bounded buffer problem )
+ Program family
+ Predicate transformer semantics
+ Process synchronization
+ Self-stabilizing distributed system
+ Semaphore ( programming )
+ Separation concern
+ Sleeping barber problem
+ Software crisis
+ Structured analysis
+ Structured programming
+ multiprogramming system
+ Unbounded nondeterminism
+ Weakest precondition calculus
+
+
+
+
+
+ Algorithms
+
+
+
+ Banker 's algorithm
+ Dijkstra 's algorithm
+ DJP algorithm ( Prim 's algorithm )
+ Dijkstra-Scholten algorithm
+ Dekker 's algorithm ( generalization )
+ Smoothsort
+ Shunting-yard algorithm
+ Tri-color marking algorithm
+ Concurrent algorithm
+ Distributed algorithm
+ Deadlock prevention algorithm
+ Self-stabilizing algorithm
+
+
+
+
+
+
+
+
+ Related people
+
+
+
+ Shlomi Dolev
+ Per Brinch Hansen
+ Tony Hoare
+ Ole-Johan Dahl
+ Leslie Lamport
+ David Parnas
+ Adriaan van Wijngaarden
+ Niklaus Wirth
+
+
+
+
+
+ topic
+
+
+
+ Dijkstra Prize ( Edsger W. Dijkstra Prize Distributed Computing )
+ Centrum Wiskunde & Informatica
+ E.W . Dijkstra Archive ( University Texas Austin )
+ List pioneer computer science
+ List important publication computer science
+ List important publication theoretical computer science
+ List important publication concurrent , parallel , distributed computing
+
+
+
+
+
+
+
+
+ 1 Dijkstra 's numbered manuscript computing science .
+ Wikiquote
+
+
+
+
+
+
+
+
+
+
+
+ Retrieved `` http : //en.wikipedia.org/w/index.php ? title=Distributed_computing & oldid=815598975 ''
+ Categories : Distributed computingDecentralizationHidden category : CS1 maint : Multiple name : author listAll article unsourced statementsArticles unsourced statement October 2016Articles DMOZ link
+
+
+
+ Navigation menu
+
+
+ Personal tool
+
+ logged inTalkContributionsCreate accountLog
+
+
+
+ Namespaces
+
+ ArticleTalk
+
+
+
+ Variants
+
+
+
+
+
+
+
+
+
+ Views
+
+ ReadEditView history
+
+
+
+
+
+
+
+
+
+
+ Search
+
+
+
+
+
+
+
+
+
+
+
+ Navigation
+
+
+ Main pageContentsFeatured contentCurrent eventsRandom articleDonate WikipediaWikipedia store
+
+
+
+ Interaction
+
+
+ HelpAbout WikipediaCommunity portalRecent changesContact page
+
+
+
+ Tools
+
+
+ link hereRelated changesUpload fileSpecial pagesPermanent linkPage informationWikidata itemCite page
+
+
+
+ Print/export
+
+
+ Create bookDownload PDFPrintable version
+
+
+
+ project
+
+
+ Wikimedia Commons
+
+
+
+ Languages
+
+
+ العربيةБеларускаяБеларуская ( тарашкевіца ) ‎БългарскиBosanskiCatalàČeštinaDanskDeutschEestiΕλληνικάEspañolEsperantoفارسیFrançais한국어IdoBahasa IndonesiaItalianoעבריתქართულიҚазақшаLatviešuLietuviųMagyarМакедонскиBahasa MelayuNederlands日本語NorskNorsk nynorskPolskiPortuguêsRomânăРусскийScotsSimple EnglishSlovenčinaСрпски / srpskiSuomiSvenskaதமிழ்TürkçeУкраїнськаاردوTiếng Việt中文
+ Edit link
+
+
+
+
+
+ page last edited 15 December 2017 , 21:03 .
+ Text available Creative Commons Attribution-ShareAlike License ;
+ additional term may apply . using site , agree Terms Use Privacy Policy . Wikipedia® registered trademark Wikimedia Foundation , Inc. , non-profit organization .
+
+
+ Privacy policy
+ Wikipedia
+ Disclaimers
+ Contact Wikipedia
+ Developers
+ Cookie statement
+ Mobile view
+
+
+
+
+
+
+
+
+
+
+
+
